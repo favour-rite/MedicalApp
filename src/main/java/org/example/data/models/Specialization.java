@@ -1,4 +1,11 @@
 package org.example.data.models;
 
-public enum Specializatiion {
+public enum Specialization {
+
+    OPTICIAN,
+    GENERAL_PRACTITIONER,
+    CARDIOLOGIST,
+    DERMATOLOGIST,
+    NEUROLOGIST,
+    PEDIATRICIAN;
 }

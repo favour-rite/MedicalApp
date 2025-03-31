@@ -1,4 +1,9 @@
 package org.example.data.respositories;
 
-public interface UserRespository {
+import org.example.data.models.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRespository extends JpaRepository<User,Long> {
 }

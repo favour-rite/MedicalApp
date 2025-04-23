@@ -12,6 +12,7 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
+
 @Service
 public class PatientServicesImpl implements PatientServices {
 
@@ -24,13 +25,13 @@ public class PatientServicesImpl implements PatientServices {
     public Patient registerPatient(Patient patient) {
         Patient existingPatient = patientRepository.findByName(patient.getName());
         if (existingPatient == null) {
-            Patient newPatient = new Patient();
-            newPatient.setName(patient.getName());
-            newPatient.setEmail(patient.getEmail());
-            newPatient.setPassword(patient.getPassword());
-            newPatient.setPhoneNumber(patient.getPhoneNumber());
-            patientRepository.save(newPatient);
-            return newPatient;
+//            Patient newPatient = new Patient();
+            patient.setName(patient.getName());
+            patient.setEmail(patient.getEmail());
+            patient.setPassword(patient.getPassword());
+            patient.setPhoneNumber(patient.getPhoneNumber());
+            patientRepository.save(patient);
+            return patient;
         }
             throw new IllegalArgumentException("Username already exists.");
     }
@@ -42,10 +43,32 @@ public class PatientServicesImpl implements PatientServices {
         }
         return existingPatient;
     }
+    @Override
+    public Appointment bookAppointment(Patient patient, Doctor doctor, Date appointmentDate, Time appointmentTime) {
+        Appointment appointment = new Appointment();
+        appointment.setPatient(patient);
+        appointment.setDoctor(doctor);
+        appointment.setAppointmentDate(appointmentDate);
+        appointment.setAppointmentTime(appointmentTime);
+        return appointmentRepository.save(appointment);
+
+    }
 
     @Override
-    public Patient bookAppointment(Doctor doctor, Date appointmentDate, Time appointmentTime) {
-        return null;
+    public void cancelAppointment(Long id){
+        appointmentRepository.deleteById(String.valueOf(id));
+    }
+
+    @Override
+    public void printAppointments() {
+        for (Appointment appointment : appointmentRepository.findAll()) {
+            System.out.println("Appointment Details:");
+            System.out.println("Patient: " + appointment.getPatient().getEmail());
+            System.out.println("Doctor: " + appointment.getDoctor().getName());
+            System.out.println("Date: " + appointment.getAppointmentDate());
+            System.out.println("Time: " + appointment.getAppointmentTime());
+            System.out.println("-------------------------------");
+        }
     }
 
     @Override

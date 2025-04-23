@@ -11,10 +11,10 @@ import java.util.List;
 public interface PatientServices {
 
     Patient registerPatient(Patient patient);
-
     Patient login(Patient patient);
-
-    Patient bookAppointment(Doctor doctor, Date appointmentDate, Time appointmentTime);
-
+    Appointment bookAppointment(Patient patient, Doctor doctor, Date appointmentDate, Time appointmentTime);
     List<Appointment> getAppointments();
+    void cancelAppointment(Long id);
+    void printAppointments();
+
 }

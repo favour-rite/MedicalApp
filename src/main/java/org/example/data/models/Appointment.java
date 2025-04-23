@@ -4,6 +4,7 @@ package org.example.data.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -19,6 +20,10 @@ public class Appointment {
 
     @ManyToOne
     private Patient patient;
-    private  String appointmentDate;
-    private String appointmentTime;
+
+    @ManyToOne
+    private MedicalHistory medicalHistory;
+
+    private Date appointmentDate;
+    private Time appointmentTime;
 }

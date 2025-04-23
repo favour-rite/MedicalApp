@@ -1,4 +1,4 @@
-package org.example.data.models;
+package org.example.data.enums;
 
 public enum Specialization {
 
